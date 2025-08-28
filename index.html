@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BN TRANSPORT - บริการรถบรรทุกครบวงจร</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <?!= include('style'); ?>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader">
+            <i class="fas fa-truck"></i>
+            <div class="loading-text">กำลังโหลด...</div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iOCIgZmlsbD0iIzFFNDBBRiIvPgo8cGF0aCBkPSJNOCAyMEgzMlYxNkg4VjIwWiIgZmlsbD0id2hpdGUiLz4KPHA+">
+                <span>BN TRANSPORT</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link active">หน้าแรก</a>
+                <a href="#about" class="nav-link">เกี่ยวกับเรา</a>
+                <a href="#services" class="nav-link">บริการ</a>
+                <a href="#portfolio" class="nav-link">ผลงาน</a>
+                <a href="#contact" class="nav-link">ติดต่อ</a>
+                <a href="tel:0901234567" class="nav-btn">
+                    <i class="fas fa-phone"></i> 090-123-4567
+                </a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg">
+            <div class="hero-slide active" style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);">
+                <div class="hero-content">
+                    <h1 class="hero-title animate-text">บริการรถบรรทุกครบวงจร</h1>
+                    <p class="hero-subtitle animate-text delay-1">ด้วย BN TRANSPORT ผู้เชี่ยวชาญด้านขนส่งที่คุณไว้วางใจได้</p>
+                    <div class="hero-features animate-text delay-2">
+                        <div class="feature-item">
+                            <i class="fas fa-clock"></i>
+                            <span>บริการ 24/7</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>ปลอดภัย 100%</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-users"></i>
+                            <span>ทีมมืออาชีพ</span>
+                        </div>
+                    </div>
+                    <div class="hero-buttons animate-text delay-3">
+                        <a href="#services" class="btn btn-primary">
+                            <i class="fas fa-truck"></i> ดูบริการ
+                        </a>
+                        <a href="#contact" class="btn btn-outline">
+                            <i class="fas fa-calculator"></i> คำนวณราคา
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Quick Services -->
+    <section class="quick-services">
+        <div class="container">
+            <div class="quick-grid">
+                <div class="quick-item" data-service="4wheel">
+                    <i class="fas fa-truck"></i>
+                    <h3>รถ 4 ล้อ</h3>
+                    <p>บรรทุก 1-2 ตัน</p>
+                </div>
+                <div class="quick-item" data-service="6wheel">
+                    <i class="fas fa-shipping-fast"></i>
+                    <h3>รถ 6 ล้อ</h3>
+                    <p>บรรทุก 5-8 ตัน</p>
+                </div>
+                <div class="quick-item" data-service="10wheel">
+                    <i class="fas fa-trailer"></i>
+                    <h3>รถ 10 ล้อ</h3>
+                    <p>บรรทุก 10-15 ตัน</p>
+                </div>
+                <div class="quick-item" data-service="crane">
+                    <i class="fas fa-tools"></i>
+                    <h3>รถเฮี๊ยบ</h3>
+                    <p>ยก + ขนส่ง</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>เกี่ยวกับ BN TRANSPORT</h2>
+                <p>ผู้นำด้านบริการขนส่งที่คุณไว้วางใจได้</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="about-item">
+                        <div class="about-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <div class="about-info">
+                            <h3>ประสบการณ์ยาวนาน</h3>
+                            <p>ด้วยประสบการณ์กว่า 10 ปี ในวงการขนส่ง เราเข้าใจความต้องการของลูกค้าเป็นอย่างดี</p>
+                        </div>
+                    </div>
+                    <div class="about-item">
+                        <div class="about-icon">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <div class="about-info">
+                            <h3>ทีมงานมืออาชีพ</h3>
+                            <p>พนักงานขับรถและทีมงานที่ผ่านการอบรมเฉพาะทาง พร้อมให้บริการอย่างมืออาชีพ</p>
+                        </div>
+                    </div>
+                    <div class="about-item">
+                        <div class="about-icon">
+                            <i class="fas fa-truck-moving"></i>
+                        </div>
+                        <div class="about-info">
+                            <h3>รถทุกคันพร้อมใช้งาน</h3>
+                            <p>รถบรรทุกทุกคันผ่านการตรวจสอบและบำรุงรักษาอย่างสม่ำเสมอ พร้อมผ้าใบคลุมกันแดดกันฝน</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="500">0</div>
+                        <div class="stat-label">โครงการที่สำเร็จ</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="50">0</div>
+                        <div class="stat-label">รถในเครือข่าย</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="24">0</div>
+                        <div class="stat-label">ชั่วโมงบริการ</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="100">0</div>
+                        <div class="stat-label">% ความพึงพอใจ</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>บริการของเรา</h2>
+                <p>เลือกบริการที่เหมาะสมกับความต้องการของคุณ</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" data-service="6wheel">
+                    <div class="service-image">
+                        <i class="fas fa-shipping-fast"></i>
+                        <div class="service-badge">ยอดนิยม</div>
+                    </div>
+                    <div class="service-content">
+                        <h3>รถ 6 ล้อ</h3>
+                        <p>เหมาะสำหรับการขนย้ายสินค้าหรือสิ่งของปริมาณมาก</p>
+                        <div class="service-specs">
+                            <div class="spec-item">
+                                <i class="fas fa-weight-hanging"></i>
+                                <span>บรรทุก 5-8 ตัน</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-ruler-combined"></i>
+                                <span>3 ขนาดให้เลือก</span>
+                            </div>
+                        </div>
+                        <div class="service-sizes">
+                            <div class="size-option">
+                                <h4>ขนาดเล็ก</h4>
+                                <p>5.30 x 2.30 x 2.30 ม.</p>
+                            </div>
+                            <div class="size-option">
+                                <h4>ขนาดกลาง</h4>
+                                <p>6.30 x 2.30 x 2.30 ม.</p>
+                            </div>
+                            <div class="size-option">
+                                <h4>ขนาดใหญ่</h4>
+                                <p>7.20 x 2.30 x 2.30 ม.</p>
+                            </div>
+                        </div>
+                        <div class="service-price">
+                            <span class="price-from">เริ่มต้น</span>
+                            <span class="price-amount">1,200 บาท</span>
+                        </div>
+                        <button class="btn btn-primary service-btn">ขอใบเสนอราคา</button>
+                    </div>
+                </div>
+
+                <div class="service-card" data-service="4wheel">
+                    <div class="service-image">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>รถ 4 ล้อ</h3>
+                        <p>เหมาะสำหรับงานขนส่งขนาดเล็กถึงกลาง</p>
+                        <div class="service-specs">
+                            <div class="spec-item">
+                                <i class="fas fa-weight-hanging"></i>
+                                <span>บรรทุก 1-2 ตัน</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-clock"></i>
+                                <span>ยืดหยุ่น รวดเร็ว</span>
+                            </div>
+                        </div>
+                        <div class="service-uses">
+                            <span class="use-tag">ของใช้ส่วนตัว</span>
+                            <span class="use-tag">เอกสาร</span>
+                            <span class="use-tag">อุปกรณ์สำนักงาน</span>
+                        </div>
+                        <div class="service-price">
+                            <span class="price-from">เริ่มต้น</span>
+                            <span class="price-amount">800 บาท</span>
+                        </div>
+                        <button class="btn btn-primary service-btn">ขอใบเสนอราคา</button>
+                    </div>
+                </div>
+
+                <div class="service-card" data-service="10wheel">
+                    <div class="service-image">
+                        <i class="fas fa-trailer"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>รถ 10 ล้อ</h3>
+                        <p>สำหรับงานขนส่งขนาดใหญ่ อุตสาหกรรม</p>
+                        <div class="service-specs">
+                            <div class="spec-item">
+                                <i class="fas fa-weight-hanging"></i>
+                                <span>บรรทุก 10-15 ตัน</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-industry"></i>
+                                <span>งานอุตสาหกรรม</span>
+                            </div>
+                        </div>
+                        <div class="service-uses">
+                            <span class="use-tag">วัสดุก่อสร้าง</span>
+                            <span class="use-tag">เครื่องจักร</span>
+                            <span class="use-tag">สินค้าโรงงาน</span>
+                        </div>
+                        <div class="service-price">
+                            <span class="price-from">เริ่มต้น</span>
+                            <span class="price-amount">2,000 บาท</span>
+                        </div>
+                        <button class="btn btn-primary service-btn">ขอใบเสนอราคา</button>
+                    </div>
+                </div>
+
+                <div class="service-card" data-service="crane">
+                    <div class="service-image">
+                        <i class="fas fa-tools"></i>
+                        <div class="service-badge special">พิเศษ</div>
+                    </div>
+                    <div class="service-content">
+                        <h3>รถเฮี๊ยบ</h3>
+                        <p>บริการยกและขนส่งในงานเดียว</p>
+                        <div class="service-specs">
+                            <div class="spec-item">
+                                <i class="fas fa-arrows-alt-v"></i>
+                                <span>ยกสูงได้</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-cogs"></i>
+                                <span>ครบเครื่อง</span>
+                            </div>
+                        </div>
+                        <div class="service-uses">
+                            <span class="use-tag">ตู้คอนเทนเนอร์</span>
+                            <span class="use-tag">เครื่องจักรหนัก</span>
+                            <span class="use-tag">วัสดุก่อสร้าง</span>
+                        </div>
+                        <div class="service-price">
+                            <span class="price-from">เริ่มต้น</span>
+                            <span class="price-amount">1,500 บาท</span>
+                        </div>
+                        <button class="btn btn-primary service-btn">ขอใบเสนอราคา</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <h2>ผลงานของเรา</h2>
+                <p>ตัวอย่างโครงการที่เราได้รับความไว้วางใจ</p>
+            </div>
+            <div class="portfolio-filter">
+                <button class="filter-btn active" data-filter="all">ทั้งหมด</button>
+                <button class="filter-btn" data-filter="moving">ย้ายบ้าน</button>
+                <button class="filter-btn" data-filter="construction">ก่อสร้าง</button>
+                <button class="filter-btn" data-filter="industrial">อุตสาหกรรม</button>
+                <button class="filter-btn" data-filter="event">จัดงาน</button>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-category="moving">
+                    <div class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h3>ย้ายบ้าน คอนโดมิเนียม</h3>
+                            <p>บริการย้ายบ้านครบวงจร พร้อมทีมงานมืออาชีพ</p>
+                            <div class="portfolio-tags">
+                                <span>รถ 6 ล้อ</span>
+                                <span>คนยกของ 4 คน</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="construction">
+                    <div class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h3>ขนส่งวัสดุก่อสร้าง</h3>
+                            <p>ส่งวัสดุก่อสร้างไปยังไซต์งาน ปลอดภัย ตรงเวลา</p>
+                            <div class="portfolio-tags">
+                                <span>รถ 10 ล้อ</span>
+                                <span>รถเฮี๊ยบ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="industrial">
+                    <div class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h3>ขนส่งเครื่องจักรโรงงาน</h3>
+                            <p>ขนส่งเครื่องจักรหนัก พร้อมการประกันภัย</p>
+                            <div class="portfolio-tags">
+                                <span>รถพิเศษ</span>
+                                <span>ทีมเฉพาะทาง</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="event">
+                    <div class="portfolio-image">
+                        <div class="portfolio-overlay">
+                            <h3>ขนส่งอุปกรณ์งานอีเว้นท์</h3>
+                            <p>บริการขนส่งอุปกรณ์จัดงาน ครบ จบ ในที่เดียว</p>
+                            <div class="portfolio-tags">
+                                <span>รถ 4 ล้อ</span>
+                                <span>รถ 6 ล้อ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Price Calculator Modal -->
+    <div id="price-calculator" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>คำนวณราคาเบื้องต้น</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="calculator-form">
+                <div class="form-group">
+                    <label>ประเภทรถ</label>
+                    <select id="truck-type">
+                        <option value="4wheel">รถ 4 ล้อ (1-2 ตัน)</option>
+                        <option value="6wheel" selected>รถ 6 ล้อ (5-8 ตัน)</option>
+                        <option value="10wheel">รถ 10 ล้อ (10-15 ตัน)</option>
+                        <option value="crane">รถเฮี๊ยบ</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>ระยะทาง (กิโลเมตร)</label>
+                    <input type="number" id="distance" placeholder="เช่น 50" min="1">
+                </div>
+                <div class="form-group">
+                    <label>ประเภทงาน</label>
+                    <select id="service-type">
+                        <option value="delivery">ขนส่งทั่วไป</option>
+                        <option value="moving">ย้ายบ้าน/สำนักงาน</option>
+                        <option value="construction">งานก่อสร้าง</option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="calculateEstimate()">
+                    <i class="fas fa-calculator"></i> คำนวณราคา
+                </button>
+                <div id="price-result" class="price-result"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>ติดต่อเรา</h2>
+                <p>พร้อมให้บริการและให้คำปรึกษาฟรี 24 ชั่วโมง</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>โทรสอบถาม</h3>
+                            <p>090-123-4567</p>
+                            <p>086-789-0123</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-line"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Line Official</h3>
+                            <p>@bntransport</p>
+                            <a href="https://line.me/ti/p/@bntransport" class="btn btn-sm btn-success">เพิ่มเพื่อน</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-facebook"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Facebook</h3>
+                            <p>BN Transport Thailand</p>
+                            <a href="#" class="btn btn-sm btn-primary">ติดตาม</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>อีเมล</h3>
+                            <p>info@bntransport.co.th</p>
+                            <p>booking@bntransport.co.th</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" name="name" placeholder="ชื่อ-นามสกุล *" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" name="phone" placeholder="เบอร์โทรศัพท์ *" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="อีเมล">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <select name="service" required>
+                                    <option value="">เลือกบริการ *</option>
+                                    <option value="4wheel">รถ 4 ล้อ</option>
+                                    <option value="6wheel">รถ 6 ล้อ</option>
+                                    <option value="10wheel">รถ 10 ล้อ</option>
+                                    <option value="crane">รถเฮี๊ยบ</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="date" name="date" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" rows="4" placeholder="รายละเอียดเพิ่มเติม เช่น จุดรับ-ส่ง, ประเภทสินค้า, ความต้องการพิเศษ"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i class="fas fa-paper-plane"></i> ส่งข้อมูล
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h3>BN TRANSPORT</h3>
+                        <p>ผู้เชี่ยวชาญด้านบริการขนส่งที่คุณไว้วางใจได้</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-line"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="tel:0901234567"><i class="fas fa-phone"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>บริการ</h4>
+                    <ul>
+                        <li><a href="#services">รถ 4 ล้อ</a></li>
+                        <li><a href="#services">รถ 6 ล้อ</a></li>
+                        <li><a href="#services">รถ 10 ล้อ</a></li>
+                        <li><a href="#services">รถเฮี๊ยบ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>เมนูด่วน</h4>
+                    <ul>
+                        <li><a href="#about">เกี่ยวกับเรา</a></li>
+                        <li><a href="#portfolio">ผลงาน</a></li>
+                        <li><a href="#contact">ติดต่อ</a></li>
+                        <li><a href="#" onclick="openCalculator()">คำนวณราคา</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>ติดต่อ</h4>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-phone"></i> 090-123-4567</p>
+                        <p><i class="fas fa-envelope"></i> info@bntransport.co.th</p>
+                        <p><i class="fab fa-line"></i> @bntransport</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 BN TRANSPORT. สงวนลิขสิทธิ์.</p>
+                <div class="payment-methods">
+                    <span>ช่องทางการชำระเงิน:</span>
+                    <i class="fas fa-money-bill-alt" title="เงินสด"></i>
+                    <i class="fas fa-university" title="โอนธนาคาร"></i>
+                    <i class="fas fa-mobile-alt" title="พร้อมเพย์"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" class="scroll-top-btn">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- WhatsApp/Line Float Buttons -->
+    <div class="float-buttons">
+        <a href="https://line.me/ti/p/@bntransport" class="float-btn line-btn">
+            <i class="fab fa-line"></i>
+        </a>
+        <a href="tel:0901234567" class="float-btn phone-btn">
+            <i class="fas fa-phone"></i>
+        </a>
+    </div>
+
+    <?!= include('script'); ?>
+</body>
+</html>
