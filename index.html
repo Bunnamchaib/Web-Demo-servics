@@ -6,76 +6,708 @@
     <title>BN TRANSPORT - บริการรถบรรทุกครบวงจร</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <?!= include('style'); ?>
+    <style>
+        :root {
+            --primary-color: #1e40af;
+            --secondary-color: #3b82f6;
+            --accent-color: #f59e0b;
+            --success-color: #10b981;
+            --dark-color: #1f2937;
+            --light-color: #f8fafc;
+            --text-dark: #374151;
+            --text-light: #6b7280;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Prompt', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color);
+            background: rgba(30, 64, 175, 0.1);
+        }
+
+        .nav-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            display: flex;
+            align-items: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><path d="M0,1000V0h1000c0,0-71.4,83.3-142.9,166.7C714.3,333.3,571.4,500,428.6,666.7C285.7,833.3,142.9,1000,0,1000z" fill="rgba(255,255,255,0.05)"/></svg>') no-repeat center center/cover;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            animation: slideInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            animation: slideInUp 1s ease-out 0.4s both;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: slideInUp 1s ease-out 0.6s both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Quick Services */
+        .quick-services {
+            padding: 4rem 0;
+            background: var(--light-color);
+        }
+
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .quick-item {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .quick-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+
+        .quick-item i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .quick-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-image {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .service-image i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .service-content {
+            padding: 2rem;
+        }
+
+        .service-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .service-specs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .spec-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .spec-item i {
+            color: var(--primary-color);
+        }
+
+        .service-price {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(30, 64, 175, 0.1);
+            border-radius: var(--border-radius);
+        }
+
+        .price-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 0;
+            background: var(--light-color);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1rem;
+            padding: 2rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .contact-icon {
+            flex-shrink: 0;
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--border-radius);
+            font-size: 1.5rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-full {
+            width: 100%;
+            justify-content: center;
+            padding: 1.25rem;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 2rem;
+            text-align: center;
+            color: #9ca3af;
+        }
+
+        /* Float Buttons */
+        .float-buttons {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 999;
+        }
+
+        .float-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+
+        .line-btn {
+            background: #00c300;
+            color: white;
+        }
+
+        .phone-btn {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .float-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-features {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .float-buttons {
+                bottom: 1rem;
+                right: 1rem;
+            }
+        }
+
+        /* Calculator Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            max-width: 500px;
+            width: 90%;
+            padding: 2rem;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .close {
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .close:hover {
+            color: #ef4444;
+        }
+
+        .price-result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            text-align: center;
+            display: none;
+        }
+
+        .result-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+    </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div id="loading-screen">
-        <div class="loader">
-            <i class="fas fa-truck"></i>
-            <div class="loading-text">กำลังโหลด...</div>
-        </div>
-    </div>
-
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <div class="nav-logo">
-                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iOCIgZmlsbD0iIzFFNDBBRiIvPgo8cGF0aCBkPSJNOCAyMEgzMlYxNkg4VjIwWiIgZmlsbD0id2hpdGUiLz4KPHA+">
+            <a href="#home" class="nav-logo">
+                <i class="fas fa-truck"></i>
                 <span>BN TRANSPORT</span>
-            </div>
-            <div class="nav-menu" id="nav-menu">
+            </a>
+            <div class="nav-menu">
                 <a href="#home" class="nav-link active">หน้าแรก</a>
-                <a href="#about" class="nav-link">เกี่ยวกับเรา</a>
                 <a href="#services" class="nav-link">บริการ</a>
-                <a href="#portfolio" class="nav-link">ผลงาน</a>
                 <a href="#contact" class="nav-link">ติดต่อ</a>
                 <a href="tel:0901234567" class="nav-btn">
                     <i class="fas fa-phone"></i> 090-123-4567
                 </a>
-            </div>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-bg">
-            <div class="hero-slide active" style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);">
-                <div class="hero-content">
-                    <h1 class="hero-title animate-text">บริการรถบรรทุกครบวงจร</h1>
-                    <p class="hero-subtitle animate-text delay-1">ด้วย BN TRANSPORT ผู้เชี่ยวชาญด้านขนส่งที่คุณไว้วางใจได้</p>
-                    <div class="hero-features animate-text delay-2">
-                        <div class="feature-item">
-                            <i class="fas fa-clock"></i>
-                            <span>บริการ 24/7</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-shield-alt"></i>
-                            <span>ปลอดภัย 100%</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-users"></i>
-                            <span>ทีมมืออาชีพ</span>
-                        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">บริการรถบรรทุกครบวงจร</h1>
+                <p class="hero-subtitle">ด้วย BN TRANSPORT ผู้เชี่ยวชาญด้านขนส่งที่คุณไว้วางใจได้</p>
+                <div class="hero-features">
+                    <div class="feature-item">
+                        <i class="fas fa-clock"></i>
+                        <span>บริการ 24/7</span>
                     </div>
-                    <div class="hero-buttons animate-text delay-3">
-                        <a href="#services" class="btn btn-primary">
-                            <i class="fas fa-truck"></i> ดูบริการ
-                        </a>
-                        <a href="#contact" class="btn btn-outline">
-                            <i class="fas fa-calculator"></i> คำนวณราคา
-                        </a>
+                    <div class="feature-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>ปลอดภัย 100%</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-users"></i>
+                        <span>ทีมมืออาชีพ</span>
                     </div>
                 </div>
+                <div class="hero-buttons">
+                    <a href="#services" class="btn btn-primary">
+                        <i class="fas fa-truck"></i> ดูบริการ
+                    </a>
+                    <a href="#" class="btn btn-outline" onclick="openCalculator()">
+                        <i class="fas fa-calculator"></i> คำนวณราคา
+                    </a>
+                </div>
             </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="scroll-arrow"></div>
         </div>
     </section>
 
@@ -83,84 +715,25 @@
     <section class="quick-services">
         <div class="container">
             <div class="quick-grid">
-                <div class="quick-item" data-service="4wheel">
+                <div class="quick-item">
                     <i class="fas fa-truck"></i>
                     <h3>รถ 4 ล้อ</h3>
                     <p>บรรทุก 1-2 ตัน</p>
                 </div>
-                <div class="quick-item" data-service="6wheel">
+                <div class="quick-item">
                     <i class="fas fa-shipping-fast"></i>
                     <h3>รถ 6 ล้อ</h3>
                     <p>บรรทุก 5-8 ตัน</p>
                 </div>
-                <div class="quick-item" data-service="10wheel">
+                <div class="quick-item">
                     <i class="fas fa-trailer"></i>
                     <h3>รถ 10 ล้อ</h3>
                     <p>บรรทุก 10-15 ตัน</p>
                 </div>
-                <div class="quick-item" data-service="crane">
+                <div class="quick-item">
                     <i class="fas fa-tools"></i>
                     <h3>รถเฮี๊ยบ</h3>
                     <p>ยก + ขนส่ง</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-header">
-                <h2>เกี่ยวกับ BN TRANSPORT</h2>
-                <p>ผู้นำด้านบริการขนส่งที่คุณไว้วางใจได้</p>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <div class="about-item">
-                        <div class="about-icon">
-                            <i class="fas fa-history"></i>
-                        </div>
-                        <div class="about-info">
-                            <h3>ประสบการณ์ยาวนาน</h3>
-                            <p>ด้วยประสบการณ์กว่า 10 ปี ในวงการขนส่ง เราเข้าใจความต้องการของลูกค้าเป็นอย่างดี</p>
-                        </div>
-                    </div>
-                    <div class="about-item">
-                        <div class="about-icon">
-                            <i class="fas fa-users-cog"></i>
-                        </div>
-                        <div class="about-info">
-                            <h3>ทีมงานมืออาชีพ</h3>
-                            <p>พนักงานขับรถและทีมงานที่ผ่านการอบรมเฉพาะทาง พร้อมให้บริการอย่างมืออาชีพ</p>
-                        </div>
-                    </div>
-                    <div class="about-item">
-                        <div class="about-icon">
-                            <i class="fas fa-truck-moving"></i>
-                        </div>
-                        <div class="about-info">
-                            <h3>รถทุกคันพร้อมใช้งาน</h3>
-                            <p>รถบรรทุกทุกคันผ่านการตรวจสอบและบำรุงรักษาอย่างสม่ำเสมอ พร้อมผ้าใบคลุมกันแดดกันฝน</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-stats">
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="500">0</div>
-                        <div class="stat-label">โครงการที่สำเร็จ</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="50">0</div>
-                        <div class="stat-label">รถในเครือข่าย</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="24">0</div>
-                        <div class="stat-label">ชั่วโมงบริการ</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="100">0</div>
-                        <div class="stat-label">% ความพึงพอใจ</div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -174,14 +747,14 @@
                 <p>เลือกบริการที่เหมาะสมกับความต้องการของคุณ</p>
             </div>
             <div class="services-grid">
-                <div class="service-card" data-service="6wheel">
+                <div class="service-card">
                     <div class="service-image">
                         <i class="fas fa-shipping-fast"></i>
                         <div class="service-badge">ยอดนิยม</div>
                     </div>
                     <div class="service-content">
                         <h3>รถ 6 ล้อ</h3>
-                        <p>เหมาะสำหรับการขนย้ายสินค้าหรือสิ่งของปริมาณมาก</p>
+                        <p>เหมาะสำหรับการขนย้ายสินค้าหรือสิ่งของปริมาณมาก บรรทุกน้ำหนักประมาณ 5-8 ตัน</p>
                         <div class="service-specs">
                             <div class="spec-item">
                                 <i class="fas fa-weight-hanging"></i>
@@ -192,35 +765,21 @@
                                 <span>3 ขนาดให้เลือก</span>
                             </div>
                         </div>
-                        <div class="service-sizes">
-                            <div class="size-option">
-                                <h4>ขนาดเล็ก</h4>
-                                <p>5.30 x 2.30 x 2.30 ม.</p>
-                            </div>
-                            <div class="size-option">
-                                <h4>ขนาดกลาง</h4>
-                                <p>6.30 x 2.30 x 2.30 ม.</p>
-                            </div>
-                            <div class="size-option">
-                                <h4>ขนาดใหญ่</h4>
-                                <p>7.20 x 2.30 x 2.30 ม.</p>
-                            </div>
-                        </div>
                         <div class="service-price">
                             <span class="price-from">เริ่มต้น</span>
                             <span class="price-amount">1,200 บาท</span>
                         </div>
-                        <button class="btn btn-primary service-btn">ขอใบเสนอราคา</button>
+                        <button class="btn btn-primary" onclick="openCalculator()">ขอใบเสนอราคา</button>
                     </div>
                 </div>
 
-                <div class="service-card" data-service="4wheel">
+                <div class="service-card">
                     <div class="service-image">
                         <i class="fas fa-truck"></i>
                     </div>
                     <div class="service-content">
                         <h3>รถ 4 ล้อ</h3>
-                        <p>เหมาะสำหรับงานขนส่งขนาดเล็กถึงกลาง</p>
+                        <p>เหมาะสำหรับงานขนส่งขนาดเล็กถึงกลาง บรรทุกน้ำหนักประมาณ 1-2 ตัน</p>
                         <div class="service-specs">
                             <div class="spec-item">
                                 <i class="fas fa-weight-hanging"></i>
@@ -231,26 +790,21 @@
                                 <span>ยืดหยุ่น รวดเร็ว</span>
                             </div>
                         </div>
-                        <div class="service-uses">
-                            <span class="use-tag">ของใช้ส่วนตัว</span>
-                            <span class="use-tag">เอกสาร</span>
-                            <span class="use-tag">อุปกรณ์สำนักงาน</span>
-                        </div>
                         <div class="service-price">
                             <span class="price-from">เริ่มต้น</span>
                             <span class="price-amount">800 บาท</span>
                         </div>
-                        <button class="btn btn-primary service-btn">ขอใบเสนอราคา</button>
+                        <button class="btn btn-primary" onclick="openCalculator()">ขอใบเสนอราคา</button>
                     </div>
                 </div>
 
-                <div class="service-card" data-service="10wheel">
+                <div class="service-card">
                     <div class="service-image">
                         <i class="fas fa-trailer"></i>
                     </div>
                     <div class="service-content">
                         <h3>รถ 10 ล้อ</h3>
-                        <p>สำหรับงานขนส่งขนาดใหญ่ อุตสาหกรรม</p>
+                        <p>สำหรับงานขนส่งขนาดใหญ่ อุตสาหกรรม บรรทุกน้ำหนักประมาณ 10-15 ตัน</p>
                         <div class="service-specs">
                             <div class="spec-item">
                                 <i class="fas fa-weight-hanging"></i>
@@ -261,27 +815,21 @@
                                 <span>งานอุตสาหกรรม</span>
                             </div>
                         </div>
-                        <div class="service-uses">
-                            <span class="use-tag">วัสดุก่อสร้าง</span>
-                            <span class="use-tag">เครื่องจักร</span>
-                            <span class="use-tag">สินค้าโรงงาน</span>
-                        </div>
                         <div class="service-price">
                             <span class="price-from">เริ่มต้น</span>
                             <span class="price-amount">2,000 บาท</span>
                         </div>
-                        <button class="btn btn-primary service-btn">ขอใบเสนอราคา</button>
+                        <button class="btn btn-primary" onclick="openCalculator()">ขอใบเสนอราคา</button>
                     </div>
                 </div>
 
-                <div class="service-card" data-service="crane">
+                <div class="service-card">
                     <div class="service-image">
                         <i class="fas fa-tools"></i>
-                        <div class="service-badge special">พิเศษ</div>
                     </div>
                     <div class="service-content">
                         <h3>รถเฮี๊ยบ</h3>
-                        <p>บริการยกและขนส่งในงานเดียว</p>
+                        <p>บริการยกและขนส่งในงานเดียว เหมาะกับงานที่ต้องการความแม่นยำสูง</p>
                         <div class="service-specs">
                             <div class="spec-item">
                                 <i class="fas fa-arrows-alt-v"></i>
@@ -292,125 +840,16 @@
                                 <span>ครบเครื่อง</span>
                             </div>
                         </div>
-                        <div class="service-uses">
-                            <span class="use-tag">ตู้คอนเทนเนอร์</span>
-                            <span class="use-tag">เครื่องจักรหนัก</span>
-                            <span class="use-tag">วัสดุก่อสร้าง</span>
-                        </div>
                         <div class="service-price">
                             <span class="price-from">เริ่มต้น</span>
                             <span class="price-amount">1,500 บาท</span>
                         </div>
-                        <button class="btn btn-primary service-btn">ขอใบเสนอราคา</button>
+                        <button class="btn btn-primary" onclick="openCalculator()">ขอใบเสนอราคา</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-            <div class="section-header">
-                <h2>ผลงานของเรา</h2>
-                <p>ตัวอย่างโครงการที่เราได้รับความไว้วางใจ</p>
-            </div>
-            <div class="portfolio-filter">
-                <button class="filter-btn active" data-filter="all">ทั้งหมด</button>
-                <button class="filter-btn" data-filter="moving">ย้ายบ้าน</button>
-                <button class="filter-btn" data-filter="construction">ก่อสร้าง</button>
-                <button class="filter-btn" data-filter="industrial">อุตสาหกรรม</button>
-                <button class="filter-btn" data-filter="event">จัดงาน</button>
-            </div>
-            <div class="portfolio-grid">
-                <div class="portfolio-item" data-category="moving">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <h3>ย้ายบ้าน คอนโดมิเนียม</h3>
-                            <p>บริการย้ายบ้านครบวงจร พร้อมทีมงานมืออาชีพ</p>
-                            <div class="portfolio-tags">
-                                <span>รถ 6 ล้อ</span>
-                                <span>คนยกของ 4 คน</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item" data-category="construction">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <h3>ขนส่งวัสดุก่อสร้าง</h3>
-                            <p>ส่งวัสดุก่อสร้างไปยังไซต์งาน ปลอดภัย ตรงเวลา</p>
-                            <div class="portfolio-tags">
-                                <span>รถ 10 ล้อ</span>
-                                <span>รถเฮี๊ยบ</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item" data-category="industrial">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <h3>ขนส่งเครื่องจักรโรงงาน</h3>
-                            <p>ขนส่งเครื่องจักรหนัก พร้อมการประกันภัย</p>
-                            <div class="portfolio-tags">
-                                <span>รถพิเศษ</span>
-                                <span>ทีมเฉพาะทาง</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item" data-category="event">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <h3>ขนส่งอุปกรณ์งานอีเว้นท์</h3>
-                            <p>บริการขนส่งอุปกรณ์จัดงาน ครบ จบ ในที่เดียว</p>
-                            <div class="portfolio-tags">
-                                <span>รถ 4 ล้อ</span>
-                                <span>รถ 6 ล้อ</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Price Calculator Modal -->
-    <div id="price-calculator" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>คำนวณราคาเบื้องต้น</h2>
-                <span class="close">&times;</span>
-            </div>
-            <div class="calculator-form">
-                <div class="form-group">
-                    <label>ประเภทรถ</label>
-                    <select id="truck-type">
-                        <option value="4wheel">รถ 4 ล้อ (1-2 ตัน)</option>
-                        <option value="6wheel" selected>รถ 6 ล้อ (5-8 ตัน)</option>
-                        <option value="10wheel">รถ 10 ล้อ (10-15 ตัน)</option>
-                        <option value="crane">รถเฮี๊ยบ</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>ระยะทาง (กิโลเมตร)</label>
-                    <input type="number" id="distance" placeholder="เช่น 50" min="1">
-                </div>
-                <div class="form-group">
-                    <label>ประเภทงาน</label>
-                    <select id="service-type">
-                        <option value="delivery">ขนส่งทั่วไป</option>
-                        <option value="moving">ย้ายบ้าน/สำนักงาน</option>
-                        <option value="construction">งานก่อสร้าง</option>
-                    </select>
-                </div>
-                <button type="button" class="btn btn-primary" onclick="calculateEstimate()">
-                    <i class="fas fa-calculator"></i> คำนวณราคา
-                </button>
-                <div id="price-result" class="price-result"></div>
-            </div>
-        </div>
-    </div>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
@@ -438,17 +877,6 @@
                         <div class="contact-details">
                             <h3>Line Official</h3>
                             <p>@bntransport</p>
-                            <a href="https://line.me/ti/p/@bntransport" class="btn btn-sm btn-success">เพิ่มเพื่อน</a>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fab fa-facebook"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h3>Facebook</h3>
-                            <p>BN Transport Thailand</p>
-                            <a href="#" class="btn btn-sm btn-primary">ติดตาม</a>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -490,7 +918,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <textarea name="message" rows="4" placeholder="รายละเอียดเพิ่มเติม เช่น จุดรับ-ส่ง, ประเภทสินค้า, ความต้องการพิเศษ"></textarea>
+                            <textarea name="message" rows="4" placeholder="รายละเอียดเพิ่มเติม เช่น จุดรับ-ส่ง, ประเภทสินค้า"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary btn-full">
                             <i class="fas fa-paper-plane"></i> ส่งข้อมูล
@@ -501,6 +929,43 @@
         </div>
     </section>
 
+    <!-- Price Calculator Modal -->
+    <div id="price-calculator" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>คำนวณราคาเบื้องต้น</h2>
+                <span class="close" onclick="closeCalculator()">&times;</span>
+            </div>
+            <div class="calculator-form">
+                <div class="form-group">
+                    <label>ประเภทรถ</label>
+                    <select id="truck-type">
+                        <option value="4wheel">รถ 4 ล้อ (1-2 ตัน)</option>
+                        <option value="6wheel" selected>รถ 6 ล้อ (5-8 ตัน)</option>
+                        <option value="10wheel">รถ 10 ล้อ (10-15 ตัน)</option>
+                        <option value="crane">รถเฮี๊ยบ</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>ระยะทาง (กิโลเมตร)</label>
+                    <input type="number" id="distance" placeholder="เช่น 50" min="1">
+                </div>
+                <div class="form-group">
+                    <label>ประเภทงาน</label>
+                    <select id="service-type">
+                        <option value="delivery">ขนส่งทั่วไป</option>
+                        <option value="moving">ย้ายบ้าน/สำนักงาน</option>
+                        <option value="construction">งานก่อสร้าง</option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-primary btn-full" onclick="calculateEstimate()">
+                    <i class="fas fa-calculator"></i> คำนวณราคา
+                </button>
+                <div id="price-result" class="price-result"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -510,29 +975,14 @@
                         <h3>BN TRANSPORT</h3>
                         <p>ผู้เชี่ยวชาญด้านบริการขนส่งที่คุณไว้วางใจได้</p>
                     </div>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-line"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="tel:0901234567"><i class="fas fa-phone"></i></a>
-                    </div>
                 </div>
                 <div class="footer-section">
                     <h4>บริการ</h4>
-                    <ul>
-                        <li><a href="#services">รถ 4 ล้อ</a></li>
-                        <li><a href="#services">รถ 6 ล้อ</a></li>
-                        <li><a href="#services">รถ 10 ล้อ</a></li>
-                        <li><a href="#services">รถเฮี๊ยบ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>เมนูด่วน</h4>
-                    <ul>
-                        <li><a href="#about">เกี่ยวกับเรา</a></li>
-                        <li><a href="#portfolio">ผลงาน</a></li>
-                        <li><a href="#contact">ติดต่อ</a></li>
-                        <li><a href="#" onclick="openCalculator()">คำนวณราคา</a></li>
+                    <ul style="list-style: none;">
+                        <li><a href="#services" style="color: #9ca3af; text-decoration: none;">รถ 4 ล้อ</a></li>
+                        <li><a href="#services" style="color: #9ca3af; text-decoration: none;">รถ 6 ล้อ</a></li>
+                        <li><a href="#services" style="color: #9ca3af; text-decoration: none;">รถ 10 ล้อ</a></li>
+                        <li><a href="#services" style="color: #9ca3af; text-decoration: none;">รถเฮี๊ยบ</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -546,22 +996,11 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2024 BN TRANSPORT. สงวนลิขสิทธิ์.</p>
-                <div class="payment-methods">
-                    <span>ช่องทางการชำระเงิน:</span>
-                    <i class="fas fa-money-bill-alt" title="เงินสด"></i>
-                    <i class="fas fa-university" title="โอนธนาคาร"></i>
-                    <i class="fas fa-mobile-alt" title="พร้อมเพย์"></i>
-                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Scroll to Top Button -->
-    <button id="scrollTopBtn" class="scroll-top-btn">
-        <i class="fas fa-chevron-up"></i>
-    </button>
-
-    <!-- WhatsApp/Line Float Buttons -->
+    <!-- Float Buttons -->
     <div class="float-buttons">
         <a href="https://line.me/ti/p/@bntransport" class="float-btn line-btn">
             <i class="fab fa-line"></i>
@@ -571,6 +1010,126 @@
         </a>
     </div>
 
-    <?!= include('script'); ?>
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Active nav link
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Calculator Modal
+        function openCalculator() {
+            document.getElementById('price-calculator').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCalculator() {
+            document.getElementById('price-calculator').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function calculateEstimate() {
+            const truckType = document.getElementById('truck-type').value;
+            const distance = parseInt(document.getElementById('distance').value);
+            const serviceType = document.getElementById('service-type').value;
+
+            if (!distance || distance < 1) {
+                alert('กรุณากรอกระยะทางที่ถูกต้อง');
+                return;
+            }
+
+            const basePrices = {
+                '4wheel': { base: 800, perKm: 15 },
+                '6wheel': { base: 1200, perKm: 18 },
+                '10wheel': { base: 2000, perKm: 25 },
+                'crane': { base: 1500, perKm: 20 }
+            };
+            
+            const serviceMultiplier = {
+                'delivery': 1,
+                'moving': 1.2,
+                'construction': 1.3
+            };
+            
+            const base = basePrices[truckType];
+            const price = Math.round((base.base + (distance * base.perKm)) * serviceMultiplier[serviceType]);
+
+            const resultDiv = document.getElementById('price-result');
+            resultDiv.innerHTML = `
+                <div class="result-price">${price.toLocaleString()} บาท</div>
+                <div class="result-note">
+                    *ราคาเป็นการประมาณการเบื้องต้น<br>
+                    ราคาขั้นสุดท้ายขึ้นอยู่กับรายละเอียดงานจริง
+                </div>
+                <button class="btn btn-primary" style="margin-top: 1rem; width: 100%;" onclick="closeCalculator(); document.getElementById('contact').scrollIntoView({behavior: 'smooth'});">
+                    <i class="fas fa-phone"></i> ติดต่อขอใบเสนอราคา
+                </button>
+            `;
+            resultDiv.style.display = 'block';
+        }
+
+        // Contact Form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('✅ ขอบคุณสำหรับข้อมูล เราจะติดต่อกลับเร็วๆ นี้');
+            this.reset();
+        });
+
+        // Click outside modal to close
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('price-calculator');
+            if (e.target === modal) {
+                closeCalculator();
+            }
+        });
+
+        // Escape key to close modal
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeCalculator();
+            }
+        });
+
+        console.log('🚛 BN TRANSPORT Website Loaded!');
+    </script>
 </body>
 </html>
