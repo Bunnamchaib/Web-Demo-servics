@@ -566,7 +566,7 @@
             transform: scale(1.1);
         }
 
-        /* Calculator Modal - แก้ไขสไตล์ */
+        /* Calculator Modal */
         .modal {
             display: none;
             position: fixed;
@@ -579,7 +579,7 @@
             backdrop-filter: blur(5px);
         }
 
-        .modal.show {
+        .modal.active {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -594,7 +594,7 @@
             max-height: 90vh;
             overflow-y: auto;
             padding: 0;
-            animation: slideInScale 0.3s ease-out;
+            animation: modalShow 0.3s ease-out;
         }
 
         .modal-header {
@@ -692,7 +692,7 @@
             }
         }
 
-        @keyframes slideInScale {
+        @keyframes modalShow {
             from {
                 opacity: 0;
                 transform: scale(0.9);
@@ -792,7 +792,7 @@
                     <a href="#services" class="btn btn-primary">
                         <i class="fas fa-truck"></i> ดูบริการ
                     </a>
-                    <button class="btn btn-outline" onclick="openCalculator()">
+                    <button class="btn btn-outline" id="calc-btn-hero">
                         <i class="fas fa-calculator"></i> คำนวณราคา
                     </button>
                 </div>
@@ -804,22 +804,22 @@
     <section class="quick-services">
         <div class="container">
             <div class="quick-grid">
-                <div class="quick-item" onclick="scrollToServices()">
+                <div class="quick-item" data-scroll="services">
                     <i class="fas fa-truck"></i>
                     <h3>รถ 4 ล้อ</h3>
                     <p>บรรทุก 1-2 ตัน</p>
                 </div>
-                <div class="quick-item" onclick="scrollToServices()">
+                <div class="quick-item" data-scroll="services">
                     <i class="fas fa-shipping-fast"></i>
                     <h3>รถ 6 ล้อ</h3>
                     <p>บรรทุก 5-8 ตัน</p>
                 </div>
-                <div class="quick-item" onclick="scrollToServices()">
+                <div class="quick-item" data-scroll="services">
                     <i class="fas fa-trailer"></i>
                     <h3>รถ 10 ล้อ</h3>
                     <p>บรรทุก 10-15 ตัน</p>
                 </div>
-                <div class="quick-item" onclick="scrollToServices()">
+                <div class="quick-item" data-scroll="services">
                     <i class="fas fa-tools"></i>
                     <h3>รถเฮี๊ยบ</h3>
                     <p>ยก + ขนส่ง</p>
@@ -858,7 +858,7 @@
                             <span class="price-from">เริ่มต้น</span>
                             <span class="price-amount">1,200 บาท</span>
                         </div>
-                        <button class="btn btn-primary" onclick="openCalculatorWithService('6wheel')">ขอใบเสนอราคา</button>
+                        <button class="btn btn-primary quote-btn" data-service="6wheel">ขอใบเสนอราคา</button>
                     </div>
                 </div>
 
@@ -883,7 +883,7 @@
                             <span class="price-from">เริ่มต้น</span>
                             <span class="price-amount">800 บาท</span>
                         </div>
-                        <button class="btn btn-primary" onclick="openCalculatorWithService('4wheel')">ขอใบเสนอราคา</button>
+                        <button class="btn btn-primary quote-btn" data-service="4wheel">ขอใบเสนอราคา</button>
                     </div>
                 </div>
 
@@ -908,7 +908,7 @@
                             <span class="price-from">เริ่มต้น</span>
                             <span class="price-amount">2,000 บาท</span>
                         </div>
-                        <button class="btn btn-primary" onclick="openCalculatorWithService('10wheel')">ขอใบเสนอราคา</button>
+                        <button class="btn btn-primary quote-btn" data-service="10wheel">ขอใบเสนอราคา</button>
                     </div>
                 </div>
 
@@ -933,7 +933,7 @@
                             <span class="price-from">เริ่มต้น</span>
                             <span class="price-amount">1,500 บาท</span>
                         </div>
-                        <button class="btn btn-primary" onclick="openCalculatorWithService('crane')">ขอใบเสนอราคา</button>
+                        <button class="btn btn-primary quote-btn" data-service="crane">ขอใบเสนอราคา</button>
                     </div>
                 </div>
             </div>
@@ -1030,16 +1030,16 @@
     </section>
 
     <!-- Price Calculator Modal -->
-    <div id="price-calculator" class="modal">
+    <div id="priceModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2>คำนวณราคาเบื้องต้น</h2>
-                <button class="close" onclick="closeCalculator()" type="button">&times;</button>
+                <button class="close" id="closeModal">&times;</button>
             </div>
             <div class="calculator-form">
                 <div class="form-group">
                     <label>ประเภทรถ</label>
-                    <select id="truck-type">
+                    <select id="truckType">
                         <option value="4wheel">รถ 4 ล้อ (1-2 ตัน)</option>
                         <option value="6wheel" selected>รถ 6 ล้อ (5-8 ตัน)</option>
                         <option value="10wheel">รถ 10 ล้อ (10-15 ตัน)</option>
@@ -1048,20 +1048,20 @@
                 </div>
                 <div class="form-group">
                     <label>ระยะทาง (กิโลเมตร)</label>
-                    <input type="number" id="distance" placeholder="เช่น 50" min="1">
+                    <input type="number" id="distanceInput" placeholder="เช่น 50" min="1">
                 </div>
                 <div class="form-group">
                     <label>ประเภทงาน</label>
-                    <select id="service-type">
+                    <select id="serviceTypeSelect">
                         <option value="delivery">ขนส่งทั่วไป</option>
                         <option value="moving">ย้ายบ้าน/สำนักงาน</option>
                         <option value="construction">งานก่อสร้าง</option>
                     </select>
                 </div>
-                <button type="button" class="btn btn-primary btn-full" onclick="calculateEstimate()">
+                <button class="btn btn-primary btn-full" id="calculateBtn">
                     <i class="fas fa-calculator"></i> คำนวณราคา
                 </button>
-                <div id="price-result" class="price-result">
+                <div id="priceResult" class="price-result">
                     <!-- ผลลัพธ์จะแสดงที่นี่ -->
                 </div>
             </div>
@@ -1113,106 +1113,53 @@
     </div>
 
     <script>
-        // ตัวแปรสำหรับ Modal
-        let isModalOpen = false;
+        console.log('🚛 BN TRANSPORT Loading...');
 
-        // Smooth scrolling
-        function smoothScroll(target) {
-            const element = document.querySelector(target);
-            if (element) {
-                element.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        }
+        // DOM Elements
+        const modal = document.getElementById('priceModal');
+        const calcBtnHero = document.getElementById('calc-btn-hero');
+        const quoteBtns = document.querySelectorAll('.quote-btn');
+        const closeBtn = document.getElementById('closeModal');
+        const calculateBtn = document.getElementById('calculateBtn');
+        const truckTypeSelect = document.getElementById('truckType');
+        const distanceInput = document.getElementById('distanceInput');
+        const serviceTypeSelect = document.getElementById('serviceTypeSelect');
+        const priceResult = document.getElementById('priceResult');
 
-        // Scroll to services
-        function scrollToServices() {
-            smoothScroll('#services');
-        }
-
-        // Navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = this.getAttribute('href');
-                smoothScroll(target);
-            });
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Active nav link
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                if (window.pageYOffset >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
-        });
-
-        // Calculator Modal Functions
-        function openCalculator() {
-            const modal = document.getElementById('price-calculator');
-            modal.style.display = 'flex';
-            modal.classList.add('show');
+        // Utility Functions
+        function showModal() {
+            modal.classList.add('active');
             document.body.style.overflow = 'hidden';
-            isModalOpen = true;
-            
-            // Reset form
-            document.getElementById('distance').value = '';
-            const resultDiv = document.getElementById('price-result');
-            resultDiv.classList.remove('show');
-            resultDiv.innerHTML = '';
+            console.log('✅ Modal opened');
         }
 
-        function openCalculatorWithService(serviceType) {
-            openCalculator();
-            // Set the truck type based on service
-            const truckSelect = document.getElementById('truck-type');
-            truckSelect.value = serviceType;
+        function hideModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            priceResult.classList.remove('show');
+            priceResult.innerHTML = '';
+            distanceInput.value = '';
+            console.log('✅ Modal closed');
         }
 
-        function closeCalculator() {
-            const modal = document.getElementById('price-calculator');
-            modal.classList.remove('show');
-            setTimeout(() => {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-                isModalOpen = false;
-            }, 300);
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
 
-        function calculateEstimate() {
-            const truckType = document.getElementById('truck-type').value;
-            const distance = parseInt(document.getElementById('distance').value);
-            const serviceType = document.getElementById('service-type').value;
+        function calculatePrice() {
+            const truckType = truckTypeSelect.value;
+            const distance = parseInt(distanceInput.value);
+            const serviceType = serviceTypeSelect.value;
+
+            console.log('Calculating:', { truckType, distance, serviceType });
 
             // Validation
             if (!distance || distance < 1) {
                 alert('❌ กรุณากรอกระยะทางที่ถูกต้อง (ตัวเลขที่มากกว่า 0)');
-                document.getElementById('distance').focus();
+                distanceInput.focus();
                 return;
             }
 
@@ -1235,8 +1182,7 @@
             const price = Math.round((base.base + (distance * base.perKm)) * multiplier);
 
             // Show result
-            const resultDiv = document.getElementById('price-result');
-            resultDiv.innerHTML = `
+            priceResult.innerHTML = `
                 <div class="result-price">${price.toLocaleString()} บาท</div>
                 <div class="result-note">
                     *ราคาเป็นการประมาณการเบื้องต้น<br>
@@ -1247,12 +1193,9 @@
                     <i class="fas fa-phone"></i> ติดต่อขอใบเสนอราคา
                 </button>
             `;
-            resultDiv.classList.add('show');
+            priceResult.classList.add('show');
 
-            // Scroll to result
-            setTimeout(() => {
-                resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 100);
+            console.log('✅ Price calculated:', price);
         }
 
         function getServiceName(serviceType) {
@@ -1265,67 +1208,120 @@
         }
 
         function requestQuote() {
-            closeCalculator();
+            hideModal();
             setTimeout(() => {
-                smoothScroll('#contact');
-            }, 500);
+                scrollToSection('contact');
+            }, 300);
         }
 
         // Event Listeners
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 DOM loaded, setting up events...');
+
+            // Calculator button in hero
+            if (calcBtnHero) {
+                calcBtnHero.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Hero calc button clicked');
+                    showModal();
+                });
+            }
+
+            // Quote buttons in service cards
+            quoteBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const service = this.getAttribute('data-service');
+                    console.log('Quote button clicked for:', service);
+                    truckTypeSelect.value = service;
+                    showModal();
+                });
+            });
+
+            // Close modal
+            if (closeBtn) {
+                closeBtn.addEventListener('click', hideModal);
+            }
+
+            // Calculate button
+            if (calculateBtn) {
+                calculateBtn.addEventListener('click', calculatePrice);
+            }
+
+            // Enter key to calculate
+            if (distanceInput) {
+                distanceInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        calculatePrice();
+                    }
+                });
+            }
+
             // Click outside modal to close
             window.addEventListener('click', function(e) {
-                const modal = document.getElementById('price-calculator');
-                if (e.target === modal && isModalOpen) {
-                    closeCalculator();
+                if (e.target === modal) {
+                    hideModal();
                 }
             });
 
             // Escape key to close modal
             document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && isModalOpen) {
-                    closeCalculator();
+                if (e.key === 'Escape') {
+                    hideModal();
                 }
             });
 
-            // Enter key to calculate
-            document.getElementById('distance').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    calculateEstimate();
-                }
-            });
-        });
-
-        // Form submission handling
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> กำลังส่ง...';
-            submitBtn.disabled = true;
-        });
-
-        // Check if form was submitted successfully
-        window.addEventListener('load', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has('success') || window.location.hash === '#contact') {
-                setTimeout(() => {
-                    const successMsg = document.getElementById('success-message');
-                    if (successMsg) {
-                        successMsg.classList.add('show');
-                        setTimeout(() => {
-                            successMsg.classList.remove('show');
-                        }, 5000);
+            // Quick service items
+            document.querySelectorAll('.quick-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const scrollTarget = this.getAttribute('data-scroll');
+                    if (scrollTarget) {
+                        scrollToSection(scrollTarget);
                     }
-                }, 500);
+                });
+            });
+
+            // Smooth scrolling for nav links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = this.getAttribute('href').substring(1);
+                    scrollToSection(target);
+                });
+            });
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', () => {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    const submitBtn = document.getElementById('submitBtn');
+                    if (submitBtn) {
+                        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> กำลังส่ง...';
+                        submitBtn.disabled = true;
+                    }
+                });
             }
+
+            console.log('✅ All events set up successfully!');
         });
 
-        console.log('🚛 BN TRANSPORT Website Ready! All functions working properly.');
-        
-        // Debug function for testing
-        window.testCalculator = function() {
-            console.log('Testing calculator...');
-            openCalculator();
-        };
+        // Global functions for inline onclick
+        window.requestQuote = requestQuote;
+        window.showModal = showModal;
+        window.hideModal = hideModal;
+        window.calculatePrice = calculatePrice;
+
+        console.log('🎉 BN TRANSPORT Website Ready!');
     </script>
 </body>
 </html>
